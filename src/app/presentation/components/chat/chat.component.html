@@ -1,0 +1,37 @@
+<div class="chat-container">
+  <div class="chat-messages">
+
+    <div class="grid gap-y-2">
+      <app-chat-message
+      text="¡Hola! Soy un asistente de inteligencia artificial creado para representar a Jesús Lázaro. Aunque soy una IA,
+      hablaré como si fuera él mismo para hacer esta conversación más cercana y personal."
+      />
+
+      @for (message of messages(); track message.text) {
+        @if( message.isGpt){
+          <app-chat-message
+          [text]="message.text"
+          />
+        } @else {
+          <app-my-message
+          [text]="message.text"
+          />
+        }
+      }
+
+
+    </div>
+
+    @if(isLoading()){
+      <app-typing-loader></app-typing-loader>
+    }
+  </div>
+
+  <!-- Messages box -->
+  <app-text-message-box
+    placeholder="Escribe aqui..."
+    (onMessage)="handleMessage($event)"
+  />
+
+
+</div>
