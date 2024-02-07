@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
+  ViewChild,
   inject,
   signal,
 } from '@angular/core';
@@ -31,6 +33,7 @@ import { OpenAiService } from 'app/presentation/services/openai.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ChatComponent {
+  @ViewChild('messagesContainer') public messageContainer!: ElementRef
   public messages = signal<Message[]>([]);
   public thread = signal<MessageThread[]>([]);
   public isLoading = signal(false);
@@ -70,6 +73,8 @@ export default class ChatComponent {
       },
     ]);
 
+    setTimeout(() => this.scrollToBottom(), 0);
+
     let finalMessage: string = '';
 
     for await (const text of stream) {
@@ -86,9 +91,18 @@ export default class ChatComponent {
     ]);
   }
 
+  scrollToBottom(): void {
+    if(this.messageContainer){
+      try {
+        this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight;
+      } catch (err) { }
+    }
+  }
+
   handleStreamResponse(message: string) {
     this.messages().pop();
     const messages = this.messages();
     this.messages.set([...messages, { isGpt: true, text: message }]);
+    this.scrollToBottom()
   }
 }

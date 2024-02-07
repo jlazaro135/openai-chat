@@ -3,36 +3,18 @@
   (ngSubmit)="handleSubmit()"
   class="flex flex-row items-center h-16 rounded-xl w-full px-4"
 >
-  <!-- <div class="flex-grow">
-    <div class="relative w-full">
-      <input
-        type="text"
-        autofocus
-        class="flex w-full border rounded-xl text-white focus:outline-none focus:border-green-200 p-4 bg-[#343541]"
-        placeholder="Mensaje..."
-        formControlName="prompt"
-        [autocomplete]="disableCorrections ? 'on' : 'off'"
-        [spellcheck]="disableCorrections ? 'on' : 'off'"
-      />
-    </div>
-  </div>
 
-  <div class="ml-4">
-    <button class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm p-4 text-center  dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800" type="submit" [disabled]="form.invalid">
-      <i class="fa-regular fa-circle-up"></i>
-    </button>
-  </div> -->
   <div class="flex-grow">
     <label
       for="default-search"
-      class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+      class="mb-2 text-sm font-medium text-white sr-only dark:text-gray-900"
       >Search</label
     >
     <div class="relative">
       <input
         type="text"
         id="default-search"
-        class="block w-full p-4 text-sm text-white border border-gray-300 outline-none rounded-lg bg-[#343541]"
+        class="block w-full p-4 text-sm text-white dark:text-gray-900 border border-gray-300 outline-none rounded-lg bg-[#343541] dark:bg-[#F1F1F5]"
         placeholder="Mensaje..."
         formControlName="prompt"
         [autocomplete]="disableCorrections ? 'on' : 'off'"
@@ -40,12 +22,12 @@
       />
       <button
         type="submit"
-        class="text-white absolute end-2.5 bottom-2.5 font-medium rounded-lg text-sm px-4 py-2"
-        [ngClass]="{ 'bg-white': form.valid, 'bg-gray-500': !form.valid }"
+        class="text-white dark:text-gray-900 absolute end-2.5 bottom-2.5 font-medium rounded-lg text-sm px-4 py-2"
+        [ngClass]="{ 'bg-white dark:bg-slate-800': form.valid, 'bg-gray-500 dark:bg-slate-300': !form.valid }"
         type="submit"
         [disabled]="form.invalid"
       >
-        <i class="text-[#343541] fa-regular fa-circle-up"></i>
+        <i class="dark:text-white text-gray-900 fa-regular fa-circle-up"></i>
       </button>
     </div>
   </div>

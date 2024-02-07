@@ -9,7 +9,7 @@
 
 html,
 body {
-  background-color: #1b3634;
+  @apply bg-[#F1F1F5] dark:bg-slate-800;
   color: white;
   font-family: "Libre Baskerville", "Open Sans", sans-serif;
 }
@@ -23,7 +23,7 @@ ul {
 }
 
 strong {
-  @apply font-bold text-indigo-400 text-xl;
+  @apply font-bold text-xl text-[#aa7aff];
 }
 
 em {
@@ -39,11 +39,31 @@ em {
 }
 
 .chat-container {
-  @apply flex flex-col flex-auto flex-shrink-0 bg-[#343541] h-[calc(100vh-90px)] p-4;
+  @apply flex flex-col flex-auto flex-shrink-0 bg-[#343541] dark:bg-[#F1F1F5] h-[calc(100vh-90px)] p-1 lg:p-4;
 }
 
 .chat-messages {
   @apply flex flex-col h-full overflow-x-auto mb-4;
+}
+
+markdown p {
+  line-height: 1.8;
+  margin: 5px 0;
+  @apply text-white dark:text-gray-900;
+}
+
+markdown a {
+  text-decoration: underline;
+  color: #00b6ab;
+}
+
+markdown li {
+  margin: 10px 0;
+  @apply text-white dark:text-gray-900;
+}
+
+markdown li p {
+  display: inline;
 }
 
 /* Animations */
@@ -53,9 +73,9 @@ em {
 }
 
 .thinking {
+  @apply bg-white dark:bg-black;
   width: 10px;
   height: 20px;
-  background-color: white;
   animation: blink 1.5s infinite;
 }
 
@@ -98,5 +118,4 @@ em {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #aa7aff !important;
-
 }

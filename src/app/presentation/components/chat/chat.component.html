@@ -1,31 +1,46 @@
-<div class="chat-container shadow-[5px_5px_rgba(0,_98,_90,_0.4),_10px_10px_rgba(0,_98,_90,_0.3),_15px_15px_rgba(0,_98,_90,_0.2),_20px_20px_rgba(0,_98,_90,_0.1),_25px_25px_rgba(0,_98,_90,_0.05)] ">
-
-  <div class="chat-messages">
-
+<div
+  class="chat-container shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] shadow-[#00B6AB]"
+>
+  <div class="chat-messages" #messagesContainer>
     <div class="grid gap-y-2">
       <app-chat-message
-      text="¡Hola! Soy un asistente de inteligencia artificial creado para representar a Jesús Lázaro. Aunque soy una IA,
+        text="¡Hola! Soy un asistente de inteligencia artificial creado para representar a Jesús Lázaro. Aunque soy una IA,
       hablaré como si fuera él mismo para hacer esta conversación más cercana y personal."
       />
 
-      @for (message of messages(); track message.text) {
-        @if( message.isGpt){
-          <app-chat-message
-          [text]="message.text"
-          />
-        } @else {
-          <app-my-message
-          [text]="message.text"
-          />
-        }
-      }
-
-
+      @for (message of messages(); track message.text) { @if( message.isGpt){
+      <app-chat-message [text]="message.text" />
+      } @else {
+      <app-my-message [text]="message.text" />
+      } }
     </div>
 
-    @if(isLoading()){
-      <app-typing-loader></app-typing-loader>
-    }
+    <div class="grid grid-cols-2 gap-2 mt-auto">
+      <div
+        class="rounded-2xl border-2 border-slate-400 dark:border-[#e2e2e7] bg-transparent hover:bg-[#2a384f] dark:hover:bg-[#e2e2e7] p-2 flex items-center min-h-[75px] cursor-pointer"
+      >
+        <p class="text-white dark:text-slate-800 m-auto text-sm">Texto</p>
+        <i class="text-white dark:text-gray-900 fa-regular fa-circle-up"></i>
+      </div>
+      <div
+        class="rounded-2xl border-2 border-slate-400 dark:border-[#e2e2e7] bg-transparent hover:bg-[#2a384f] dark:hover:bg-[#e2e2e7] p-2 flex items-center min-h-[75px] cursor-pointer"
+      >
+        <p class="text-white dark:text-slate-800 m-auto text-sm">Texto</p>
+        <i class="text-white dark:text-gray-900 fa-regular fa-circle-up"></i>
+      </div>
+      <div
+        class="rounded-2xl border-2 border-slate-400 dark:border-[#e2e2e7] bg-transparent hover:bg-[#2a384f] dark:hover:bg-[#e2e2e7] p-2 flex items-center min-h-[75px] cursor-pointer"
+      >
+        <p class="text-white dark:text-slate-800 m-auto text-sm">Texto</p>
+        <i class="text-white dark:text-gray-900 fa-regular fa-circle-up"></i>
+      </div>
+      <div
+        class="rounded-2xl border-2 border-slate-400 dark:border-[#e2e2e7] bg-transparent hover:bg-[#2a384f] dark:hover:bg-[#e2e2e7] p-2 flex items-center min-h-[75px] cursor-pointer"
+      >
+        <p class="text-white dark:text-slate-800 m-auto text-sm">Texto</p>
+        <i class="text-white dark:text-gray-900 fa-regular fa-circle-up"></i>
+      </div>
+    </div>
   </div>
 
   <!-- Messages box -->
@@ -33,6 +48,4 @@
     placeholder="Escribe aqui..."
     (onMessage)="handleMessage($event)"
   />
-
-
 </div>
