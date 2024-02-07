@@ -1,34 +1,52 @@
 <form
   [formGroup]="form"
   (ngSubmit)="handleSubmit()"
-  class="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4"
-  >
-
-  <div class="flex-grow">
+  class="flex flex-row items-center h-16 rounded-xl w-full px-4"
+>
+  <!-- <div class="flex-grow">
     <div class="relative w-full">
-
-      <input type="text"
+      <input
+        type="text"
         autofocus
-        class="flex w-full border rounded-xl text-gray-800 focus:outline-none focus:border-indigo-300 pl-4 h-10"
+        class="flex w-full border rounded-xl text-white focus:outline-none focus:border-green-200 p-4 bg-[#343541]"
         placeholder="Mensaje..."
         formControlName="prompt"
-        [autocomplete]="disableCorrections ? 'on' : 'off' "
-        [spellcheck]="disableCorrections ? 'on' : 'off' "
-      >
-
+        [autocomplete]="disableCorrections ? 'on' : 'off'"
+        [spellcheck]="disableCorrections ? 'on' : 'off'"
+      />
     </div>
   </div>
 
   <div class="ml-4">
-
-    <button
-    class="btn-primary"
-    type="submit"
-    [disabled]="form.invalid"
-    >
-      <span class="mr-2">Enviar</span>
-      <i class="fa-regular fa-paper-plane"></i>
+    <button class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm p-4 text-center  dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800" type="submit" [disabled]="form.invalid">
+      <i class="fa-regular fa-circle-up"></i>
     </button>
+  </div> -->
+  <div class="flex-grow">
+    <label
+      for="default-search"
+      class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
+      >Search</label
+    >
+    <div class="relative">
+      <input
+        type="text"
+        id="default-search"
+        class="block w-full p-4 text-sm text-white border border-gray-300 outline-none rounded-lg bg-[#343541]"
+        placeholder="Mensaje..."
+        formControlName="prompt"
+        [autocomplete]="disableCorrections ? 'on' : 'off'"
+        [spellcheck]="disableCorrections ? 'on' : 'off'"
+      />
+      <button
+        type="submit"
+        class="text-white absolute end-2.5 bottom-2.5 font-medium rounded-lg text-sm px-4 py-2"
+        [ngClass]="{ 'bg-white': form.valid, 'bg-gray-500': !form.valid }"
+        type="submit"
+        [disabled]="form.invalid"
+      >
+        <i class="text-[#343541] fa-regular fa-circle-up"></i>
+      </button>
+    </div>
   </div>
-
 </form>

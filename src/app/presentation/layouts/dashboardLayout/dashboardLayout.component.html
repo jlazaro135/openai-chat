@@ -1,11 +1,24 @@
-<main class="flex flex-row mt-7">
-  <section
-    class="mx-3 sm:mx-20 flex flex-col w-full h-[calc(100vh-50px)] bg-white bg-opacity-10 p-5 rounded-3xl"
-  >
-    <div class="flex h-full flex-row">
-      <div class="flex flex-col flex-auto p-1">
-        <chat></chat>
+<main class="lg:flex justify-around">
+  <section class="lg:w-1/4 p-4 flex flex-col justify-center text-white">
+    <div class="max-w-[800px] m-auto">
+      <h1 class="heading text-5xl lg:text-8xl text-[#aa7aff]">Profile GPT</h1>
+      <p class="leading-loose">
+        Bienvenidos a mi chatbot personal desarrollado con OpenAI. Soy
+        <a
+          href="https://www.linkedin.com/in/jlazaro135/"
+          class="hover:underline text-[#aa7aff] font-bold"
+          target="_blank"
+          >Jesús Lázaro</a
+        >, desarrollador Front-end y he desarrollado este asistente que
+          responderá a todas vuestras preguntas sobre mi perfil profesional.
+      </p>
+      <p class="mt-4 leading-loose underline">Visita mi perfil: </p>
+      <div class="buttons flex py-5">
+        <navigate-button></navigate-button>
       </div>
     </div>
+  </section>
+  <section class="lg:w-2/4 p-4">
+    <chat></chat>
   </section>
 </main>

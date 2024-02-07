@@ -27,6 +27,7 @@ import { OpenAiService } from 'app/presentation/services/openai.service';
     TextMessageBoxComponent,
   ],
   templateUrl: './chat.component.html',
+  styles: ['.thinking {width: 5px; height: 10px; background-color: white}'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class ChatComponent {
@@ -65,7 +66,7 @@ export default class ChatComponent {
       },
       {
         isGpt: true,
-        text: '...',
+        text: `<div class="thinking"></div>`,
       },
     ]);
 
@@ -83,8 +84,6 @@ export default class ChatComponent {
         content: finalMessage,
       },
     ]);
-
-    console.log(this.thread())
   }
 
   handleStreamResponse(message: string) {

@@ -7,20 +7,15 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-  background-color: #000000;
+html,
+body {
+  background-color: #1b3634;
   color: white;
-  font-family: 'Open Sans', sans-serif;
-
+  font-family: "Libre Baskerville", "Open Sans", sans-serif;
 }
-
 
 h1 {
   @apply text-3xl font-bold mb-4;
-}
-
-p {
-  @apply mb-4;
 }
 
 ul {
@@ -35,7 +30,6 @@ em {
   @apply italic text-pink-500;
 }
 
-
 .btn-primary {
   @apply bg-indigo-500 text-white font-bold py-2 px-4 rounded-xl hover:bg-indigo-700 transition-all duration-200 ease-in-out;
 }
@@ -45,19 +39,64 @@ em {
 }
 
 .chat-container {
-  @apply flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-white bg-opacity-5 h-[calc(100vh-90px)] p-4 w-[calc(100vw-500px)];
+  @apply flex flex-col flex-auto flex-shrink-0 bg-[#343541] h-[calc(100vh-90px)] p-4;
 }
 
 .chat-messages {
-  @apply flex flex-col h-full overflow-x-auto mb-4 overflow-scroll;
+  @apply flex flex-col h-full overflow-x-auto mb-4;
 }
-
 
 /* Animations */
 
-.fade-in { animation: fadeIn .3s; }
+.fade-in {
+  animation: fadeIn 0.3s;
+}
+
+.thinking {
+  width: 10px;
+  height: 20px;
+  background-color: white;
+  animation: blink 1.5s infinite;
+}
 
 @keyframes fadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px !important;
+  height: 10px !important;
+}
+::-webkit-scrollbar-track {
+  background: #fff !important;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb {
+  background: #aa7aff !important;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:horizontal {
+  background: #aa7aff !important;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #aa7aff !important;
+
 }
