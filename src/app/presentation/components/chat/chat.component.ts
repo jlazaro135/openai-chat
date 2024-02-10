@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  OnInit,
   ViewChild,
   inject,
   signal,
@@ -29,18 +30,77 @@ import { OpenAiService } from 'app/presentation/services/openai.service';
     TextMessageBoxComponent,
   ],
   templateUrl: './chat.component.html',
-  styles: ['.thinking {width: 5px; height: 10px; background-color: white}'],
+  styles: ['.thinking {width: 5px; height: 10px; margin: 5px 0;}'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ChatComponent {
-  @ViewChild('messagesContainer') public messageContainer!: ElementRef
+export default class ChatComponent implements OnInit {
+  @ViewChild('messagesContainer') public messageContainer!: ElementRef;
   public messages = signal<Message[]>([]);
   public thread = signal<MessageThread[]>([]);
   public isLoading = signal(false);
   public openAiService = inject(OpenAiService);
   public abortSignal = new AbortController();
+  public firstMessage: string = '';
+  public firstMessageIsLoaded: boolean = false;
+
+  public recommendedMessages: any = [
+    'Quiero conocer tu experiencia profesional',
+    '¿Tienes página personal?',
+    '¿Qué haces en tu tiempo libre?',
+    '¿Has hecho algún proyecto o desarrollo interesante?',
+  ];
+
+  public initMessageSplitted: string[] = [
+    '¡Hola! Soy',
+    ' un asistente de ',
+    'inteligencia artificial creado ',
+    'para representar',
+    ' a Jesús Lázaro. ',
+    'Aunque soy una IA, ',
+    'hablaré como ',
+    'si fuera él ',
+    'mismo para hacer ',
+    'esta conversación más',
+    ' cercana y personal.',
+  ];
+
+  ngOnInit(): void {
+    this.messages.update((prev) => [
+      ...prev,
+      {
+        isGpt: true,
+        text: `<div class="thinking"></div>`,
+      },
+    ]);
+
+    setTimeout(() => {
+      this.sumarCadenasConIntervalo(this.initMessageSplitted, 100);
+    }, 1000);
+  }
+
+  sumarCadenasConIntervalo(arrayChunks: string[], intervalo: number) {
+    let index = 0;
+    let cadenaSumada = '';
+
+    const intervalId = setInterval(() => {
+      if (index < arrayChunks.length) {
+        cadenaSumada += arrayChunks[index];
+        this.handleStreamResponse(cadenaSumada); // Puedes cambiar console.log por la acción que desees con la cadena sumada
+        index++;
+      } else {
+        this.firstMessageIsLoaded = true;
+        clearInterval(intervalId);
+      }
+    }, intervalo);
+  }
+
+  sendRecommendedMessage(message: string) {
+    this.handleMessage(message);
+    this.recommendedMessages = [];
+  }
 
   async handleMessage(prompt: string) {
+    this.recommendedMessages = [];
     this.isLoading.set(true);
 
     this.abortSignal.abort();
@@ -74,7 +134,6 @@ export default class ChatComponent {
     ]);
 
     setTimeout(() => this.scrollToBottom(), 0);
-
     let finalMessage: string = '';
 
     for await (const text of stream) {
@@ -92,10 +151,11 @@ export default class ChatComponent {
   }
 
   scrollToBottom(): void {
-    if(this.messageContainer){
+    if (this.messageContainer) {
       try {
-        this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight;
-      } catch (err) { }
+        this.messageContainer.nativeElement.scrollTop =
+          this.messageContainer.nativeElement.scrollHeight;
+      } catch (err) {}
     }
   }
 
@@ -103,6 +163,6 @@ export default class ChatComponent {
     this.messages().pop();
     const messages = this.messages();
     this.messages.set([...messages, { isGpt: true, text: message }]);
-    this.scrollToBottom()
+    this.scrollToBottom();
   }
 }

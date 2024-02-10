@@ -1,20 +1,19 @@
 <form
   [formGroup]="form"
   (ngSubmit)="handleSubmit()"
-  class="flex flex-row items-center h-16 rounded-xl w-full px-4"
+  class="flex flex-row items-center h-16 rounded-xl w-full px-3 lg:px-4"
 >
-
   <div class="flex-grow">
     <label
       for="default-search"
-      class="mb-2 text-sm font-medium text-white sr-only dark:text-gray-900"
+      class="mb-2 text-sm font-medium dark:text-white sr-only text-gray-900"
       >Search</label
     >
     <div class="relative">
       <input
         type="text"
         id="default-search"
-        class="block w-full p-4 text-sm text-white dark:text-gray-900 border border-gray-300 outline-none rounded-lg bg-[#343541] dark:bg-[#F1F1F5]"
+        class="block w-full p-4 text-sm dark:text-white text-gray-900 border border-gray-300 outline-none rounded-lg dark:bg-slate-700 bg-gray-100"
         placeholder="Mensaje..."
         formControlName="prompt"
         [autocomplete]="disableCorrections ? 'on' : 'off'"
@@ -22,12 +21,15 @@
       />
       <button
         type="submit"
-        class="text-white dark:text-gray-900 absolute end-2.5 bottom-2.5 font-medium rounded-lg text-sm px-4 py-2"
-        [ngClass]="{ 'bg-white dark:bg-slate-800': form.valid, 'bg-gray-500 dark:bg-slate-300': !form.valid }"
+        class="dark:text-white text-gray-900 absolute end-2.5 bottom-2.5 font-medium rounded-lg text-sm px-4 py-2"
+        [ngClass]="{
+          'dark:bg-white bg-slate-800': form.valid,
+          'dark:bg-gray-500 bg-slate-300': !form.valid
+        }"
         type="submit"
         [disabled]="form.invalid"
       >
-        <i class="dark:text-white text-gray-900 fa-regular fa-circle-up"></i>
+        <i class="text-white dark:text-gray-900 fa-regular fa-circle-up"></i>
       </button>
     </div>
   </div>

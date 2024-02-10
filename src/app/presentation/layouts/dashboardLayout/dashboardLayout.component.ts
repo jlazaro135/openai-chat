@@ -11,24 +11,46 @@ import ChatComponent from '@components/chat/chat.component';
     CommonModule,
     ChatComponent,
     DownloadBtnComponent,
-    NavigateButtonComponent
+    NavigateButtonComponent,
   ],
   templateUrl: './dashboardLayout.component.html',
-  styles: [`
-  .heading {
-    background: #A477F7;
-    background: linear-gradient(to bottom right, #00B6AB 0%, #A477F7 60%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
-  }
-`],
+  styles: [
+    `
+      .heading {
+        background: #a477f7;
+        background: linear-gradient(280deg, #00b6ab 40%, #a477f7 80%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+      }
+
+      .heading:hover {
+        animation: textShine 0.5s ease-in forwards;
+      }
+
+      chat {
+        width: 100%
+      }
+
+      @keyframes textShine {
+        0% {
+          background: linear-gradient(280deg, #00b6ab 40%, #a477f7 80%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          text-fill-color: transparent;
+        }
+        100% {
+          background: linear-gradient(280deg, #a477f7 40%, #00b6ab 80%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          text-fill-color: transparent;
+        }
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DashboardLayoutComponent {
-
-
-
-
- }
+export class DashboardLayoutComponent {}
