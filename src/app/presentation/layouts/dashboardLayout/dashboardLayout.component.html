@@ -1,7 +1,9 @@
 <main class="lg:flex justify-around min-h-[100vh]">
-  <section class="lg:w-2/5 flex flex-col justify-center text-slate-800 dark:text-white">
-    <div class="p-6 lg:p-12 max-w-[650px] mx-auto">
-      <h1 class="heading text-5xl lg:text-8xl text-[#aa7aff]">Profile GPT</h1>
+  <section
+    class="lg:w-2/5 flex flex-col lg:justify-center text-slate-800 dark:text-white min-h-[100vh] lg:min-h-0"
+  >
+    <div class="p-6 lg:p-12 max-w-[650px] mx-auto lg:mt-auto">
+      <h1 class="heading text-8xl text-[#aa7aff]">Profile GPT</h1>
       <p class="leading-relaxed">
         Bienvenidos a mi chatbot personal desarrollado con OpenAI. Soy
         <a
@@ -10,15 +12,58 @@
           target="_blank"
           >Jesús Lázaro</a
         >, desarrollador Front-end y he desarrollado este asistente que
-          responderá a todas vuestras preguntas sobre mi perfil profesional.
+        responderá a todas vuestras preguntas sobre mi perfil profesional.
       </p>
-      <p class="mt-4 leading-loose underline">Visita mi perfil: </p>
+      <p class="mt-4 leading-loose underline">Visita mi perfil:</p>
       <div class="buttons flex py-5">
         <navigate-button></navigate-button>
       </div>
     </div>
+    <div class="links flex gap-2 px-6 lg:px-12 lg:my-auto items-center">
+      Tecnologías:
+      <div class="max-w-8 flex items-center">
+        <img
+          class="w-[100%]"
+          src="assets/angular_gradient.png"
+          alt="angular"
+          title="angular"
+        />
+      </div>
+      <div class="max-w-8 flex items-center">
+        <img
+          class="w-[100%]"
+          src="assets/tailwind-css-icon.png"
+          alt="tailwind"
+          title="tailwind"
+        />
+      </div>
+      <div class="max-w-8 flex items-center">
+        <img
+          class="w-[100%]"
+          src="assets/nestjs.svg"
+          alt="nestjs"
+          title="nestjs"
+        />
+      </div>
+      <div class="max-w-8 flex items-center">
+        <img
+          class="w-[100%]"
+          src="assets/chatgpt-icon.png"
+          alt="openai"
+          title="openai"
+        />
+      </div>
+    </div>
+    <div class="mb-4 lg:hidden mt-auto mx-auto border-b-2 border-slate-800 dark:border-white w-fit" (click)="goToChat()">
+      <p class="text-xl text-slate-800 dark:text-white cursor-pointer">
+        Ir al chat <i class="fa-solid fa-arrow-down"></i>
+      </p>
+    </div>
   </section>
-  <section class="lg:w-3/5 flex items-center dark:bg-slate-700 bg-gray-100 justify-center">
+  <section
+    class="lg:w-3/5 flex items-center dark:bg-slate-700 bg-gray-100 justify-center"
+    #chatContainer
+  >
     <chat></chat>
   </section>
 </main>

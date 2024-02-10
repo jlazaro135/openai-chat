@@ -1,5 +1,5 @@
 import { MessageThread } from '@interfaces/messageThread.interface';
-import { environment } from 'environments/environment.development';
+import { environment } from 'environments/environment';
 
 export async function* questionUseCase(
   messageThread: MessageThread[],

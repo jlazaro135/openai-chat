@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
 import { DownloadBtnComponent } from '@components/buttons/download/downloadBtn/downloadBtn.component';
 import { NavigateButtonComponent } from '@components/buttons/navigate/navigateButton/navigateButton.component';
 import ChatComponent from '@components/chat/chat.component';
@@ -53,4 +53,10 @@ import ChatComponent from '@components/chat/chat.component';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DashboardLayoutComponent {}
+export class DashboardLayoutComponent {
+  @ViewChild('chatContainer') chatContainer!: ElementRef;
+
+  goToChat(){
+    this.chatContainer.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
