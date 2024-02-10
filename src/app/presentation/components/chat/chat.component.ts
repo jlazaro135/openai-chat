@@ -17,6 +17,7 @@ import {
 import { Message } from '@interfaces/message.interface';
 import { MessageThread } from '@interfaces/messageThread.interface';
 import { OpenAiService } from 'app/presentation/services/openai.service';
+import { ScrollService } from 'app/presentation/services/scroll.service';
 
 @Component({
   selector: 'chat',
@@ -35,6 +36,7 @@ import { OpenAiService } from 'app/presentation/services/openai.service';
 })
 export default class ChatComponent implements OnInit {
   @ViewChild('messagesContainer') public messageContainer!: ElementRef;
+
   public messages = signal<Message[]>([]);
   public thread = signal<MessageThread[]>([]);
   public isLoading = signal(false);
@@ -42,6 +44,9 @@ export default class ChatComponent implements OnInit {
   public abortSignal = new AbortController();
   public firstMessage: string = '';
   public firstMessageIsLoaded: boolean = false;
+  public windowWidth?: number
+
+  constructor(public scrollService: ScrollService) {}
 
   public recommendedMessages: any = [
     'Quiero conocer tu experiencia profesional',
@@ -65,6 +70,7 @@ export default class ChatComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    this.windowWidth = window.innerWidth
     this.messages.update((prev) => [
       ...prev,
       {
@@ -76,6 +82,7 @@ export default class ChatComponent implements OnInit {
     setTimeout(() => {
       this.sumarCadenasConIntervalo(this.initMessageSplitted, 100);
     }, 1000);
+
   }
 
   sumarCadenasConIntervalo(arrayChunks: string[], intervalo: number) {
@@ -100,6 +107,7 @@ export default class ChatComponent implements OnInit {
   }
 
   async handleMessage(prompt: string) {
+    this.scrollWindowToBottom();
     this.recommendedMessages = [];
     this.isLoading.set(true);
 
@@ -139,8 +147,9 @@ export default class ChatComponent implements OnInit {
     for await (const text of stream) {
       finalMessage = text;
       this.handleStreamResponse(text);
+      this.scrollWindowToBottom()
     }
-
+    this.scrollWindowToBottom()
     this.thread.update((prev) => [
       ...prev,
       {
@@ -164,5 +173,11 @@ export default class ChatComponent implements OnInit {
     const messages = this.messages();
     this.messages.set([...messages, { isGpt: true, text: message }]);
     this.scrollToBottom();
+  }
+
+  scrollWindowToBottom(){
+    if(this.windowWidth && this.windowWidth <= 1024){
+      this.scrollService.sendScrollEvent();
+    }
   }
 }

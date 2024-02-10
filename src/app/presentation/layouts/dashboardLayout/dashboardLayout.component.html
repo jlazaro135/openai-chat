@@ -3,7 +3,7 @@
     class="lg:w-2/5 flex flex-col lg:justify-center text-slate-800 dark:text-white min-h-[100vh] lg:min-h-0"
   >
     <div class="p-6 lg:p-12 max-w-[650px] mx-auto lg:mt-auto">
-      <h1 class="heading text-8xl text-[#aa7aff]">Profile GPT</h1>
+      <h1 class="heading text-6xl lg:text-8xl text-[#aa7aff]">Profile GPT</h1>
       <p class="leading-relaxed">
         Bienvenidos a mi chatbot personal desarrollado con OpenAI. Soy
         <a
@@ -20,8 +20,8 @@
       </div>
     </div>
     <div class="links flex gap-2 px-6 lg:px-12 lg:my-auto items-center">
-      Tecnologías:
-      <div class="max-w-8 flex items-center">
+      <span class="text-sm">Hecho con:</span>
+      <div class="max-w-7 flex items-center">
         <img
           class="w-[100%]"
           src="assets/angular_gradient.png"
@@ -29,7 +29,7 @@
           title="angular"
         />
       </div>
-      <div class="max-w-8 flex items-center">
+      <div class="max-w-7 flex items-center">
         <img
           class="w-[100%]"
           src="assets/tailwind-css-icon.png"
@@ -37,7 +37,7 @@
           title="tailwind"
         />
       </div>
-      <div class="max-w-8 flex items-center">
+      <div class="max-w-7 flex items-center">
         <img
           class="w-[100%]"
           src="assets/nestjs.svg"
@@ -45,7 +45,7 @@
           title="nestjs"
         />
       </div>
-      <div class="max-w-8 flex items-center">
+      <div class="max-w-7 flex items-center">
         <img
           class="w-[100%]"
           src="assets/chatgpt-icon.png"
@@ -54,7 +54,10 @@
         />
       </div>
     </div>
-    <div class="mb-4 lg:hidden mt-auto mx-auto border-b-2 border-slate-800 dark:border-white w-fit" (click)="goToChat()">
+    <div
+      class="lg:hidden m-auto mt-11 border-b-2 border-slate-800 dark:border-white w-fit"
+      (click)="goToChat()"
+    >
       <p class="text-xl text-slate-800 dark:text-white cursor-pointer">
         Ir al chat <i class="fa-solid fa-arrow-down"></i>
       </p>

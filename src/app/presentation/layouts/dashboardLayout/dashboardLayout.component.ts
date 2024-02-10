@@ -1,8 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Inject,
+  ViewChild,
+} from '@angular/core';
 import { DownloadBtnComponent } from '@components/buttons/download/downloadBtn/downloadBtn.component';
 import { NavigateButtonComponent } from '@components/buttons/navigate/navigateButton/navigateButton.component';
 import ChatComponent from '@components/chat/chat.component';
+import { ScrollService } from 'app/presentation/services/scroll.service';
 
 @Component({
   selector: 'dashboard',
@@ -30,7 +37,7 @@ import ChatComponent from '@components/chat/chat.component';
       }
 
       chat {
-        width: 100%
+        width: 100%;
       }
 
       @keyframes textShine {
@@ -56,7 +63,28 @@ import ChatComponent from '@components/chat/chat.component';
 export class DashboardLayoutComponent {
   @ViewChild('chatContainer') chatContainer!: ElementRef;
 
-  goToChat(){
-    this.chatContainer.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  constructor(private scrollService: ScrollService) {}
+
+  goToChat() {
+    this.chatContainer.nativeElement.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }
+
+  ngOnInit() {
+    // Suscribirse al evento de scroll
+    this.scrollService.getScrollEvent().subscribe(() => {
+      // Realizar acción de scroll
+      this.scrollToBottom();
+    });
+
+  }
+
+  scrollToBottom(): void {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth',
+    });
   }
 }
