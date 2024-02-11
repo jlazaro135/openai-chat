@@ -14,12 +14,22 @@
         >, desarrollador Front-end y he desarrollado este asistente que
         responderá a todas vuestras preguntas sobre mi perfil profesional.
       </p>
-      <p class="mt-4 leading-loose underline">Visita mi perfil:</p>
-      <div class="buttons flex py-5">
+      <div
+        class="lg:hidden mt-5 bg-[#00B6AB] active:bg-[#22625d] text-white font-bold py-2 px-4 rounded w-fit"
+        (click)="goToChat()"
+      >
+        <p class="text-xl text-slate-800 dark:text-white cursor-pointer">
+          Ir al chat <i class="fa-solid fa-arrow-down"></i>
+        </p>
+      </div>
+      <p class="mt-8 leading-loose">También puedes vistar mi CV interactivo:</p>
+      <div class="buttons flex py-2">
         <navigate-button></navigate-button>
       </div>
     </div>
-    <div class="links flex gap-2 px-6 lg:px-12 lg:my-auto items-center">
+    <div
+      class="links flex gap-2 px-6 lg:px-12 lg:my-auto items-center mt-auto mb-8"
+    >
       <span class="text-sm">Hecho con:</span>
       <div class="max-w-7 flex items-center">
         <img
@@ -53,14 +63,6 @@
           title="openai"
         />
       </div>
-    </div>
-    <div
-      class="lg:hidden m-auto mt-11 border-b-2 border-slate-800 dark:border-white w-fit"
-      (click)="goToChat()"
-    >
-      <p class="text-xl text-slate-800 dark:text-white cursor-pointer">
-        Ir al chat <i class="fa-solid fa-arrow-down"></i>
-      </p>
     </div>
   </section>
   <section
