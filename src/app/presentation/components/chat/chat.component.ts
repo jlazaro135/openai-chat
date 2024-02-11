@@ -44,7 +44,7 @@ export default class ChatComponent implements OnInit {
   public abortSignal = new AbortController();
   public firstMessage: string = '';
   public firstMessageIsLoaded: boolean = false;
-  public windowWidth?: number
+  public windowWidth?: number;
 
   constructor(public scrollService: ScrollService) {}
 
@@ -70,7 +70,7 @@ export default class ChatComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.windowWidth = window.innerWidth
+    this.windowWidth = window.innerWidth;
     this.messages.update((prev) => [
       ...prev,
       {
@@ -82,7 +82,6 @@ export default class ChatComponent implements OnInit {
     setTimeout(() => {
       this.sumarCadenasConIntervalo(this.initMessageSplitted, 100);
     }, 1000);
-
   }
 
   sumarCadenasConIntervalo(arrayChunks: string[], intervalo: number) {
@@ -122,39 +121,54 @@ export default class ChatComponent implements OnInit {
       },
     ]);
 
-    const stream = this.openAiService.question(
-      this.thread(),
-      this.abortSignal.signal
-    );
+    try {
+      const stream = this.openAiService.question(
+        this.thread(),
+        this.abortSignal.signal
+      );
 
-    this.isLoading.set(false);
+      this.isLoading.set(false);
 
+      this.messages.update((prev) => [
+        ...prev,
+        {
+          isGpt: false,
+          text: prompt,
+        },
+        {
+          isGpt: true,
+          text: `<div class="thinking"></div>`,
+        },
+      ]);
+
+      setTimeout(() => this.scrollToBottom(), 0);
+      let finalMessage: string = '';
+
+      for await (const text of stream) {
+        finalMessage = text;
+        this.handleStreamResponse(text);
+        this.scrollWindowToBottom();
+      }
+      this.scrollWindowToBottom();
+      this.thread.update((prev) => [
+        ...prev,
+        {
+          role: 'assistant',
+          content: finalMessage,
+        },
+      ]);
+    } catch (error) {
+      this.errorMessage();
+    }
+  }
+
+  errorMessage(){
+    this.messages().pop()
     this.messages.update((prev) => [
       ...prev,
       {
-        isGpt: false,
-        text: prompt,
-      },
-      {
         isGpt: true,
-        text: `<div class="thinking"></div>`,
-      },
-    ]);
-
-    setTimeout(() => this.scrollToBottom(), 0);
-    let finalMessage: string = '';
-
-    for await (const text of stream) {
-      finalMessage = text;
-      this.handleStreamResponse(text);
-      this.scrollWindowToBottom()
-    }
-    this.scrollWindowToBottom()
-    this.thread.update((prev) => [
-      ...prev,
-      {
-        role: 'assistant',
-        content: finalMessage,
+        text: `<span class="error"> <i class="fa-solid fa-circle-exclamation"></i> Hubo un problema con la conexión, vuelve a intentarlo</span>`,
       },
     ]);
   }
@@ -175,8 +189,8 @@ export default class ChatComponent implements OnInit {
     this.scrollToBottom();
   }
 
-  scrollWindowToBottom(){
-    if(this.windowWidth && this.windowWidth <= 1024){
+  scrollWindowToBottom() {
+    if (this.windowWidth && this.windowWidth <= 1024) {
       this.scrollService.sendScrollEvent();
     }
   }

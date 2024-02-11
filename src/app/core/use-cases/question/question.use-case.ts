@@ -15,12 +15,11 @@ export async function* questionUseCase(
       signal: abortSignal,
     });
 
-    if (!resp.ok) throw new Error('No se puedo analizar la pregunta  ');
+    if (!resp.ok) throw new Error('No se puedo analizar la pregunta');
 
     const reader = resp.body?.getReader();
 
     if (!reader) {
-      console.log('no se pudo generar el reader');
       throw new Error('No se pudo generar el reader');
     }
 
@@ -40,7 +39,9 @@ export async function* questionUseCase(
     }
 
     return text;
+
   } catch (error) {
-    return null;
+    console.error('Error:', error);
+    throw error;
   }
 }

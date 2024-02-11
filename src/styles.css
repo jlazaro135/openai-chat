@@ -97,6 +97,10 @@ markdown li p {
   animation: blink 1.5s infinite;
 }
 
+.error {
+  @apply !text-red-400;
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
