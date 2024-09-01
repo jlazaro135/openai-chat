@@ -1,3 +1,3 @@
 export const environment = {
-  backendApi: 'https://nest-cv-production.up.railway.app/gpt',
+  backendApi: 'https://nest-cv.onrender.com/gpt',
 };
